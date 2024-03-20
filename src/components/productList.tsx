@@ -10,21 +10,27 @@ const ProductList = (props: TProps) => {
     <div className="grid grid-cols-4 gap-7 w-[80%] m-4">
       {props.products.map((product) => (
           <div key={product.id}>
-            <a href="" className="block">
+
+            <a href="#" className="group relative block overflow-hidden">
               <img
-                  alt={product.title}
-                  src={product.thumbnail}
-                  className="h-64 w-full object-cover sm:h-90 lg:h-90"
+                src={product.thumbnail}
+                alt={product.title}
+                className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
               />
 
-              <h3 className="mt-4 text-base  text-black-900 ">{product.title}</h3>
-              <div className="flex p">
-                <p className="pr-2 text-red-600"></p>
-                  <p></p>
+              <div className="relative border border-gray-100 bg-white p-6">
+                <h3 className="mt-4 text-lg font-medium text-gray-900">{product.title}</h3>
+
+                <p className="mt-1.5 text-sm text-gray-700">${product.price}</p>
+
+                <form className="mt-4">
+                  <button
+                    className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
+                  >
+                    Add to Cart
+                  </button>
+                </form>
               </div>
-              <p className="mt-2 max-w-sm text-red-700">
-              {product.price}đ
-              </p>
             </a>
           </div>
         
