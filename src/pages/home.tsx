@@ -15,7 +15,7 @@ const Home = () => {
   },[])
   return (
     <div>
-      <h1>San pham 1233</h1>
+      <h1>San pham</h1>
       <ProductList products={products} />
     </div>
   )
