@@ -5,7 +5,7 @@ export type TProduct = {
     price: number
     discountPercentage?: number
     rating?: number
-    stock: number
+    stock?: number
     brand?: string
     category?: string
     thumbnail: string
