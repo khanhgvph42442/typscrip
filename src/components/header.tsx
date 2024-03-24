@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return(
@@ -18,19 +19,27 @@ const Header = () => {
       <nav aria-label="Global" className="hidden md:block">
         <ul className="flex items-center gap-6 text-sm">
           <li>
-            <a className="text-gray-700 transition hover:text-gray-500/75" href="#"> Trang chủ </a>
+            <NavLink to="/" className="text-gray-700 transition hover:text-gray-500/75">
+              Home
+            </NavLink>
           </li>
 
           <li>
-            <a className="text-gray-700 transition hover:text-gray-500/75" href="#"> Sản phẩm </a>
+          <NavLink to="/shop" className="text-gray-700 transition hover:text-gray-500/75">
+              Shop
+            </NavLink>
           </li>
 
           <li>
-            <a className="text-gray-700 transition hover:text-gray-500/75" href="#"> Blog </a>
+          <NavLink to="/blog" className="text-gray-700 transition hover:text-gray-500/75">
+              Blog
+            </NavLink>
           </li>
 
           <li>
-            <a className="text-gray-700 transition hover:text-gray-500/75" href="#"> Liên hệ </a>
+          <NavLink to="/register" className="text-gray-700 transition hover:text-gray-500/75">
+              Liên hệ
+            </NavLink>
           </li>
         </ul>
       </nav>

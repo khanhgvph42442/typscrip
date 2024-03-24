@@ -1,31 +1,9 @@
-import { useEffect, useState } from "react"
-import instance from "~/apis";
+
 import ProductList from "~/components/productList"
-import { TProduct } from "~/interfaces/Product"
 const Home = () => {
-  const [products, setProducts] = useState<TProduct[]>([]);
-  useEffect(() => {
-    // fetch("http://localhost:3000/products")
-    // .then((res) => res.json())
-    // .then((data) => {
-    //   setProducts(data);
-    //   return () => {
-    //     console.log("unmount")
-    //   }
-    // })
-    const getAllProducts = async () => {
-      try {
-        const {data} = await instance.get("/products");
-        setProducts(data)
-      } catch (error) {
-        console.log(error)
-      }
-    };
-    getAllProducts()
-  },[]);
   return (
     <div  className="flex mt-11">
-      <div className="ml-9 w-2/5">
+      <div className="ml-9 w-2/5"> 
           <p>DANH MỤC SẢN PHẨM</p>
           <ul className="mt-4">
             <li className="mt-1">Iphone</li>
@@ -34,9 +12,9 @@ const Home = () => {
             <li className="mt-1">Realme</li>
           </ul>
         </div>
-        <div className="ml-14">
+        <div className="ml-14 text-2xl">
           <h1>San pham</h1>
-          <ProductList products={products} />
+          <ProductList/>
         </div>
     </div>
   )
