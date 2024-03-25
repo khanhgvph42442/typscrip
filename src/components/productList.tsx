@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { TProduct } from '../interfaces/Product';
-import { Link } from "react-router-dom";
 import instance from "~/apis";
 import ProductItem from "./productItem";
 const ProductList = () => {
