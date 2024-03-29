@@ -37,8 +37,8 @@ const Header = () => {
           </li>
 
           <li>
-          <NavLink to="/register" className="text-gray-700 transition hover:text-gray-500/75">
-              Liên hệ
+          <NavLink to="/admin" className="text-gray-700 transition hover:text-gray-500/75">
+             Admin
             </NavLink>
           </li>
         </ul>
@@ -46,19 +46,14 @@ const Header = () => {
 
       <div className="flex items-center gap-4">
         <div className="sm:flex sm:gap-4">
-          <a
-            className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium  transition hover:bg-teal-700"
-            href="#"
-          >
-            Login
-          </a>
+          <NavLink to="/login" className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium  transition hover:bg-teal-700">
+          Login
+          </NavLink>
 
-          <a
-            className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-            href="#"
-          >
-            Register
-          </a>
+          <NavLink to="/register" className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block">
+          Register
+          </NavLink>
+          
         </div>
 
         <button
