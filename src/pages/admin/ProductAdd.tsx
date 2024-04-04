@@ -32,7 +32,7 @@ const ProductAdd = ({onAdd}: Props) => {
             <p className="text-center text-lg font-medium">Thêm mới sản phẩm</p>
 
             <div>
-              <label  className="sr-only">Name</label>
+              <label htmlFor="title" className="sr-only">Name</label>
 
               <div className="relative">
                 <input id='name'
@@ -46,7 +46,7 @@ const ProductAdd = ({onAdd}: Props) => {
             </div>
 
             <div>
-              <label  className="sr-only">Price</label>
+              <label htmlFor="price" className="sr-only">Price</label>
 
               <div className="relative">
                 <input id='price'
@@ -60,7 +60,7 @@ const ProductAdd = ({onAdd}: Props) => {
             </div>
 
             <div>
-              <label  className="sr-only">Description</label>
+              <label htmlFor="description" className="sr-only">Description</label>
 
               <div className="relative">
                 <input id='description'

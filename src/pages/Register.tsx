@@ -19,11 +19,11 @@ const Register = () => {
     resolver: joiResolver(userSchema),
   });
   const onSubmit = (user: TUser) => {
-    console.log(user);
+    // console.log(user);
     (async () => {
       const { data } = await instance.post("/register", user);
       if (data.user) {
-        const isConfirm = confirm("Dang ky thanh cong");
+        const isConfirm = confirm("Đăng kí thành công");
         if (isConfirm) {
           navigate("/login");
         }

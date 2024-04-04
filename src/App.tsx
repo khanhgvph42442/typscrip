@@ -45,7 +45,7 @@ function App() {
 
   const handleDelete = (id: number) => {
     (async () => {
-      const confirmValue = confirm("Are you sure?");
+      const confirmValue = confirm("Bạn có muốn xóa sản phẩm ko");
       if (confirmValue) {
         await instance.delete(`/products/${id}`);
         setProducts(products.filter((item) => item.id !== id && item));

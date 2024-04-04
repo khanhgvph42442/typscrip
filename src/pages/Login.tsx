@@ -21,6 +21,7 @@ const Login = () => {
   const onSubmit =  (user: TUser) => {
     (async () => {
       const { data } = await instance.post("/login", user);
+      console.log(data)
       if (data.user) {
         sessionStorage.setItem("accessToken", data.accessToken)
         const isConfirm = confirm("Đăng nhập thành công");
