@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { TProduct } from "~/interfaces/Product";
 
-type Props = {products: TProduct[]};
+type Props = {
+  products: TProduct[]
+  onDel: (id:number) => void
+};
 
-const Dashboard = ({products}: Props) => {
+const Dashboard = ({products, onDel}: Props) => {
   return (
     <div>
       <Link to="/admin/add"className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">
@@ -32,13 +35,14 @@ const Dashboard = ({products}: Props) => {
                   <img width={200} src={item.thumbnail} alt={item.title} />
                 </td>
                 <td className="whitespace-nowrap px-4 py-2">
-                  <button
+                  <Link to={`/admin/edit/${item.id}`}
                     className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700 mr-1"
                   >
                     Edit
-                  </button>
+                  </Link >
                   <button
                     className="inline-block rounded bg-red-600 px-4 py-2 text-xs font-medium text-white hover:bg-red-700"
+                    onClick={() => onDel(Number(item.id))}
                   >
                     Delete
                   </button>
