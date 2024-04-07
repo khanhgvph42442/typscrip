@@ -1,7 +1,7 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import instance from "~/apis";
 import { TUser } from "~/interfaces/Users";
 
@@ -21,13 +21,17 @@ const Login = () => {
   const onSubmit =  (user: TUser) => {
     (async () => {
       const { data } = await instance.post("/login", user);
-      console.log(data)
-      if (data.user) {
-        sessionStorage.setItem("accessToken", data.accessToken)
-        const isConfirm = confirm("Đăng nhập thành công");
-        if (isConfirm) {
-          navigate("/");
-        }
+      sessionStorage.setItem("token", JSON.stringify(data.accessToken));
+      sessionStorage.setItem("user", JSON.stringify(data));
+      const accessToken = sessionStorage.getItem('user');
+      const role = accessToken ? JSON.parse(accessToken).user.role : null;
+      console.log(role)
+      if (role === "admin") {
+        navigate("/admin")
+        location.reload()
+      } else{
+        navigate("/")
+        location.reload()
       }
     })();
   };
@@ -66,6 +70,7 @@ const Login = () => {
                  {errors.password && <span className="text-danger">{errors.password.message}</span>}
               </div>
             </div>
+            <Link to="/register">Register</Link>
             <button
               type="submit"
               className="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"

@@ -1,7 +1,29 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    setIsLoggedIn(!!token); // kiểm tra token có tồn tại hay không
+  }, []);
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    setIsLoggedIn(false); // đăng xuất
+    navigate("/login");
+  };
+
+  // const [userId, setUserId] = useState<string | null>(null); // Sử dụng useState để lưu ID người dùng
+
+  // useEffect(() => {
+  //   const token = sessionStorage.getItem("token");
+  //   setIsLoggedIn(!!token); // Kiểm tra token có tồn tại hay không
+  //   // Lấy ID người dùng từ sessionStorage (nếu có)
+  //   const accessToken = sessionStorage.getItem("users");
+  //   const userId = accessToken ? JSON.parse(accessToken).user._id : null;
+  //   setUserId(userId)
+  // }, []);
   return(
     <header className="bg-white">
   <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
@@ -46,13 +68,19 @@ const Header = () => {
 
       <div className="flex items-center gap-4">
         <div className="sm:flex sm:gap-4">
+        {isLoggedIn ? (
+            <button onClick={handleLogout} 
+            className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block">
+            Đăng xuất
+            </button>
+        ) : (
+          
           <NavLink to="/login" className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium  transition hover:bg-teal-700">
-          Login
+          <button> Login</button>
           </NavLink>
-
-          <NavLink to="/register" className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block">
-          Register
-          </NavLink>
+        )}
+        
+          
           
         </div>
 

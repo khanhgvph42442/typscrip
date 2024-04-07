@@ -26,6 +26,7 @@ const Register = () => {
         const isConfirm = confirm("Đăng kí thành công");
         if (isConfirm) {
           navigate("/login");
+          location.reload
         }
       }
     })();
