@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Route, Routes, useNavigate } from "react-router-dom";
-import Header from './components/header'
 import Footer from './components/footer'
 import Home from './pages/home'
 import './App.css'  
@@ -15,13 +14,18 @@ import ProductAdd from './pages/admin/ProductAdd';
 import { createProduct, getProducts, updateProduct } from './apis/product';
 import instance from './apis';
 import ProductEdit from './pages/admin/ProductEdit';
+import Header from './components/header';
 function App() {
   const navigate = useNavigate();
   const [products, setProducts] = useState<TProduct[]>([]);
+  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     (async () => {
       const data = await getProducts();
-      setProducts(data)
+      setProducts(data);
+      const token = sessionStorage.getItem("token");
+      const isAdmin = token ? true : false;
+      setIsAdmin(isAdmin);
     })();
   },[]);
 
@@ -64,14 +68,16 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
-          <Route path='/admin'>
-            <Route index element={<Dashboard products={products} onDel={handleDelete}/>}/>
-            <Route path='/admin/add' element={<ProductAdd onAdd={handleAddProduct}/>}/>
-            <Route
-                path="/admin/edit/:id"
-                element={<ProductEdit onEdit={handleEditProduct} />}
-              />
-          </Route>
+          {isAdmin && (
+            <Route path='/admin'>
+              <Route index element={<Dashboard products={products} onDel={handleDelete}/>}/>
+              <Route path='/admin/add' element={<ProductAdd onAdd={handleAddProduct}/>}/>
+              <Route
+                  path="/admin/edit/:id"
+                  element={<ProductEdit onEdit={handleEditProduct} />}
+                />
+            </Route>
+          )}
           <Route path="*" element={<Notfound />} />
         </Routes>
         <Footer />

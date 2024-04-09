@@ -4,13 +4,18 @@ import { NavLink, useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     setIsLoggedIn(!!token); // kiểm tra token có tồn tại hay không
+    const accessToken = sessionStorage.getItem("users");
+    const user = accessToken ? JSON.parse(accessToken).user : null;
+    setIsAdmin(user && user.role === "admin");
   }, []);
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     setIsLoggedIn(false); // đăng xuất
+    setIsAdmin(false);
     navigate("/login");
   };
 
@@ -58,11 +63,16 @@ const Header = () => {
             </NavLink>
           </li>
 
-          <li>
-          <NavLink to="/admin" className="text-gray-700 transition hover:text-gray-500/75">
-             Admin
-            </NavLink>
-          </li>
+          {isAdmin && (
+                <li>
+                  <NavLink
+                    to="/admin"
+                    className="text-gray-700 transition hover:text-gray-500/75"
+                  >
+                    Admin
+                  </NavLink>
+                </li>
+              )}
         </ul>
       </nav>
 
@@ -79,9 +89,14 @@ const Header = () => {
           <button> Login</button>
           </NavLink>
         )}
-        
-          
-          
+        {!isLoggedIn && (
+                <NavLink
+                  to="/register"
+                  className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium  transition hover:bg-teal-700"
+                >
+                  <button> Register</button>
+                </NavLink>
+          )}
         </div>
 
         <button
